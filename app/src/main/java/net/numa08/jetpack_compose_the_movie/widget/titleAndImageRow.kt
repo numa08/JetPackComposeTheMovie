@@ -35,13 +35,12 @@ fun TitleAndImageRow(
         Text(text = title, style = MaterialTheme.typography.h5)
         LazyRow {
             itemsIndexed(lazyImages) { index, item ->
-                Column(modifier = Modifier.clickable { onClickItem(index) }) {
-                    Image(
-                        painter = item!!,
-                        contentDescription = null,
-                        modifier = Modifier.size(width = 128.dp, height = 243.dp)
-                    )
-                }
+                Item(
+                    index = index,
+                    painter = item!!,
+                    onClickItem = onClickItem,
+                    onClickItemContextMenu = onClickItemContextMenu
+                )
             }
         }
     }
