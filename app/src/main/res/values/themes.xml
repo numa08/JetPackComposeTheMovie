@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+        <style name="Theme.JetPackComposeTheMovie" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+            <!-- Primary brand color. -->
+<!--            <item name="colorPrimary">@color/primary</item>-->
+<!--            <item name="colorPrimaryVariant">@color/primaryDark</item>-->
+<!--            <item name="colorOnPrimary">@color/white</item>-->
+<!--            &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
+<!--            <item name="colorSecondary">@color/secondary</item>-->
+<!--            <item name="colorSecondaryVariant">@color/secondaryDark</item>-->
+<!--            <item name="colorOnSecondary">@color/black</item>-->
+<!--            &lt;!&ndash; Status bar color. &ndash;&gt;-->
+<!--            <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
+            <!-- Customize your theme here. -->
+        </style>
+    <style name="Theme.JetPackComposeTheMovie.NoActionBar" >
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>
