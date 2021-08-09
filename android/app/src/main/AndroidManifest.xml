@@ -3,12 +3,13 @@
     package="net.numa08.jetpack_compose_the_movie">
 
     <application
+        android:name=".presentation.JetpackComposeTheMovieApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/Theme.JetPackComposeTheMovie"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:theme="@style/Theme.JetPackComposeTheMovie">
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"
