@@ -9,6 +9,8 @@ import androidx.compose.material.icons.outlined.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -35,7 +37,12 @@ fun MainApplicationNavigation(
         startDestination = Screen.Home.route,
         modifier = modifier,
     ) {
-        composable(Screen.Home.route) { HomePage(navController = navController) }
+        composable(Screen.Home.route) {
+            HomePage(
+                navController = navController,
+                viewModel = hiltViewModel()
+            )
+        }
         composable(Screen.New.route) { Text(text = "new") }
         composable(Screen.Search.route) { Text(text = "search") }
         composable(Screen.Download.route) { Text(text = "download") }

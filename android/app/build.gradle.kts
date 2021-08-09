@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -53,10 +54,14 @@ dependencies {
         Dependencies.AndroidX.Compose.materialIconsExtended,
         Dependencies.AndroidX.Compose.livedata,
         Dependencies.AndroidX.Hilt.compose,
+        Dependencies.AndroidX.Hilt.hilt,
+        Dependencies.AndroidX.Hilt.viewModel,
         Dependencies.AndroidX.Navigation.compose,
         Dependencies.AndroidX.Paging.compose,
         Dependencies.AndroidX.Room.ktx,
     ).forEach(::implementation)
     kapt(Dependencies.AndroidX.Room.compiler)
+    kapt(Dependencies.AndroidX.Hilt.hiltCompiler)
+    kapt(Dependencies.AndroidX.Hilt.compiler)
     debugImplementation(Dependencies.AndroidX.Compose.debugTools)
 }

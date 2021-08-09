@@ -31,7 +31,12 @@ object Dependencies {
             const val debugTools = "androidx.compose.ui:ui-tooling:$version"
         }
         object Hilt {
+            const val classPath = "com.google.dagger:hilt-android-gradle-plugin:2.38.1"
+            const val hilt = "com.google.dagger:hilt-android:2.38.1"
+            const val hiltCompiler = "com.google.dagger:hilt-android-compiler:2.38.1"
             const val compose = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
+            const val viewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+            const val compiler = "androidx.hilt:hilt-compiler:1.0.0-alpha03"
         }
         object Navigation {
             const val compose = "androidx.navigation:navigation-compose:2.4.0-alpha04"

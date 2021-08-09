@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import net.numa08.jetpack_compose_the_movie.data.AppDatabase
+import net.numa08.jetpack_compose_the_movie.data.TitleDao
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -20,4 +21,7 @@ object DatabaseModule {
         Room.databaseBuilder(context, AppDatabase::class.java, "movie.db")
             .createFromAsset("movie.db")
             .build()
+
+    @Provides
+    fun providesTitleDao(database: AppDatabase): TitleDao = database.titleDao()
 }
