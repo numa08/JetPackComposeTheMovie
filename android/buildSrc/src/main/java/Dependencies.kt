@@ -36,7 +36,8 @@ object Dependencies {
             const val hiltCompiler = "com.google.dagger:hilt-android-compiler:2.38.1"
             const val compose = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
             const val viewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
-            const val compiler = "androidx.hilt:hilt-compiler:1.0.0-alpha03"
+            const val compiler = "androidx.hilt:hilt-compiler:1.0.0"
+            const val worker = "androidx.hilt:hilt-work:1.0.0"
         }
         object Navigation {
             const val compose = "androidx.navigation:navigation-compose:2.4.0-alpha04"
@@ -48,7 +49,11 @@ object Dependencies {
             private const val version = "2.3.0"
             const val ktx = "androidx.room:room-ktx:$version"
             const val compiler = "androidx.room:room-compiler:$version"
-
+        }
+        object WorkManager {
+            private const val version = "2.5.0"
+            const val ktx = "androidx.work:work-runtime-ktx:$version"
+            const val gcm = "androidx.work:work-gcm:$version"
         }
     }
 
@@ -56,6 +61,9 @@ object Dependencies {
         object GradlePlugin {
             private const val version = "1.5.21"
             const val classPath = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
+        }
+        object Serialization {
+            const val json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
         }
     }
 }

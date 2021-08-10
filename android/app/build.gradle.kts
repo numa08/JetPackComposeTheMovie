@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    kotlin("plugin.serialization") version "1.5.20"
 }
 
 android {
@@ -16,6 +17,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["room.schemaLocation"] = "$projectDir/schemas"
+            }
+        }
     }
 
     buildTypes {
@@ -56,9 +62,13 @@ dependencies {
         Dependencies.AndroidX.Hilt.compose,
         Dependencies.AndroidX.Hilt.hilt,
         Dependencies.AndroidX.Hilt.viewModel,
+        Dependencies.AndroidX.Hilt.worker,
         Dependencies.AndroidX.Navigation.compose,
         Dependencies.AndroidX.Paging.compose,
         Dependencies.AndroidX.Room.ktx,
+        Dependencies.AndroidX.WorkManager.ktx,
+        Dependencies.AndroidX.WorkManager.gcm,
+        Dependencies.Kotlin.Serialization.json
     ).forEach(::implementation)
     kapt(Dependencies.AndroidX.Room.compiler)
     kapt(Dependencies.AndroidX.Hilt.hiltCompiler)

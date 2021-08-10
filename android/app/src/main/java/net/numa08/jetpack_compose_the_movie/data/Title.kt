@@ -5,8 +5,8 @@ import androidx.room.*
 @Entity(tableName = "title")
 data class OriginalTitle(
     @PrimaryKey
-    @ColumnInfo(name = "tconst")
-    val tableId: String,
+    @ColumnInfo(name = "tconst", index = true)
+    val titleId: String,
     val primaryTitle: String?,
     val originalTitle: String?,
     val isAdult: Boolean,
@@ -16,15 +16,20 @@ data class OriginalTitle(
     val titleType: String?
 )
 
-@Entity(tableName = "title_aka",
-foreignKeys = [ForeignKey(
-    entity = OriginalTitle::class,
-    parentColumns = ["tconst"],
-    childColumns = ["titleId"],
-)])
+@Entity(
+    tableName = "title_aka",
+    indices = [
+        Index(value = ["titleId", "language", "region"])
+    ],
+    foreignKeys = [ForeignKey(
+        entity = OriginalTitle::class,
+        parentColumns = ["tconst"],
+        childColumns = ["titleId"],
+    )]
+)
 data class Title(
-    @PrimaryKey
-    val id: Int,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val titleId: String,
     val title: String?,
     val language: String?,

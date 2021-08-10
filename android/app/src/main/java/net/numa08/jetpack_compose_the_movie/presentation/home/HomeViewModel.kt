@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val titleDao: TitleDao
+    titleDao: TitleDao
 ) : ViewModel() {
 
     val allTitle: Flow<List<JapaneseTitle>> = titleDao.allTitleWithJapanese()

@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class GenreMaster(
     @PrimaryKey
     val id: Int,
-    val genre: String
+    val genre: String,
+    val jaGenre: String
 )
