@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+option java_package = "net.numa08.jetpack_compose_the_movie.data.datastore";
+
+message ApplicationState {
+  bool isInitialDataInserted = 1;
+}

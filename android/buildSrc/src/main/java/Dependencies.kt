@@ -55,6 +55,10 @@ object Dependencies {
             const val ktx = "androidx.work:work-runtime-ktx:$version"
             const val gcm = "androidx.work:work-gcm:$version"
         }
+        object DataStore {
+            private const val version = "1.0.0"
+            const val dataStore = "androidx.datastore:datastore:$version"
+        }
     }
 
     object Kotlin {
@@ -65,5 +69,11 @@ object Dependencies {
         object Serialization {
             const val json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
         }
+    }
+
+    object Protobuf {
+        private const val version = "3.17.3"
+        const val protobuf = "com.google.protobuf:protoc:$version"
+        const val javaLite = "com.google.protobuf:protobuf-javalite:$version"
     }
 }

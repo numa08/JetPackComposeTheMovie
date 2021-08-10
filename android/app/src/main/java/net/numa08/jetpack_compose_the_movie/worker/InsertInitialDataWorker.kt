@@ -1,27 +1,39 @@
 package net.numa08.jetpack_compose_the_movie.worker
 
 import android.content.Context
+import androidx.datastore.core.DataStore
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import net.numa08.jetpack_compose_the_movie.data.*
+import net.numa08.jetpack_compose_the_movie.data.datastore.ApplicationStateOuterClass.ApplicationState
 import net.numa08.jetpack_compose_the_movie.data.json.Genre
 import net.numa08.jetpack_compose_the_movie.data.json.GenreTitle as GenreTitleJson
 import net.numa08.jetpack_compose_the_movie.data.json.TitleAka
 import net.numa08.jetpack_compose_the_movie.data.json.TitleBasic
 
+@Suppress("BlockingMethodInNonBlockingContext")
 @HiltWorker
 class InsertInitialDataWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted workerParams: WorkerParameters,
-    private val titleDao: TitleDao
+    private val titleDao: TitleDao,
+    private val applicationStateDataStore: DataStore<ApplicationState>
 ) : CoroutineWorker(appContext, workerParams) {
     override suspend fun doWork(): Result {
+        val isInitialDataInserted =
+            runBlocking { applicationStateDataStore.data.map { it.isInitialDataInserted }.first() }
+        if (isInitialDataInserted) {
+            return Result.success(workDataOf("result" to "noop"))
+        }
         return coroutineScope {
             val loadGenreTask = async { loadGenre() }
             val loadTitleTask = async {
@@ -30,7 +42,14 @@ class InsertInitialDataWorker @AssistedInject constructor(
             }
             listOf(loadGenreTask, loadTitleTask).awaitAll()
             loadGenreTitle()
-            return@coroutineScope Result.success()
+            applicationStateDataStore
+                .updateData {
+                    it.toBuilder()
+                        .setIsInitialDataInserted(true)
+                        .build()
+                }
+
+            return@coroutineScope Result.success(workDataOf("result" to "inserted"))
         }
     }
 

@@ -1,8 +1,11 @@
+import com.google.protobuf.gradle.*
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("com.google.protobuf") version "0.8.17"
     kotlin("plugin.serialization") version "1.5.20"
 }
 
@@ -68,10 +71,27 @@ dependencies {
         Dependencies.AndroidX.Room.ktx,
         Dependencies.AndroidX.WorkManager.ktx,
         Dependencies.AndroidX.WorkManager.gcm,
-        Dependencies.Kotlin.Serialization.json
+        Dependencies.AndroidX.DataStore.dataStore,
+        Dependencies.Kotlin.Serialization.json,
+        Dependencies.Protobuf.javaLite,
     ).forEach(::implementation)
     kapt(Dependencies.AndroidX.Room.compiler)
     kapt(Dependencies.AndroidX.Hilt.hiltCompiler)
     kapt(Dependencies.AndroidX.Hilt.compiler)
     debugImplementation(Dependencies.AndroidX.Compose.debugTools)
+}
+
+protobuf {
+    protoc {
+        artifact = Dependencies.Protobuf.protobuf
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                id("java") {
+                    options.add("lite")
+                }
+            }
+        }
+    }
 }
