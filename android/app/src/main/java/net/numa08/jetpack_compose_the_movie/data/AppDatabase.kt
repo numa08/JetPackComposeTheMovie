@@ -4,7 +4,10 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [GenreMaster::class, Title::class, OriginalTitle::class],
+    entities = [GenreMaster::class,
+        Title::class,
+        OriginalTitle::class,
+        GenreTitle::class],
     version = 1,
     exportSchema = false,
     views = [JapaneseTitle::class]

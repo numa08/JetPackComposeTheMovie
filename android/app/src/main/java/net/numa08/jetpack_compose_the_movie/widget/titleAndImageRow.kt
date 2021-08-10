@@ -5,6 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -22,12 +24,12 @@ import androidx.paging.compose.itemsIndexed
 import net.numa08.jetpack_compose_the_movie.R
 import net.numa08.jetpack_compose_the_movie.presentation.theme.MainApplicationTheme
 
+@ExperimentalMaterialApi
 @Composable
 fun TitleAndImageRow(
     title: String,
     images: Pager<Int, Painter>,
     onClickItem: (Int) -> Unit,
-    onClickItemContextMenu: (Int, Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val lazyImages = images.flow.collectAsLazyPagingItems()
@@ -39,44 +41,45 @@ fun TitleAndImageRow(
                     index = index,
                     painter = item!!,
                     onClickItem = onClickItem,
-                    onClickItemContextMenu = onClickItemContextMenu
                 )
             }
         }
     }
 }
 
+@ExperimentalMaterialApi
 @Composable
 private fun Item(
     index: Int,
     painter: Painter,
     onClickItem: (Int) -> Unit,
-    onClickItemContextMenu: (Int, Int) -> Unit
 ) {
-    Column(modifier = Modifier.clickable { onClickItem(index) }) {
+    Card(onClick = { onClickItem(index) }) {
         Image(
             painter = painter,
             contentDescription = null,
-            modifier = Modifier.size(width = 128.dp, height = 243.dp)
+            modifier = Modifier.size(width = 121.dp, height = 220.dp)
         )
     }
 }
 
+@ExperimentalMaterialApi
 @Preview(showBackground = true)
 @Composable
 fun ItemPreview() {
     Item(
         index = 0,
-        painter = painterResource(id = R.drawable.ic_launcher_background),
+        painter = painterResource(id = R.drawable.dummy),
         onClickItem = {},
-        onClickItemContextMenu = { _, _ -> })
+    )
 }
 
+@ExperimentalMaterialApi
 @Preview(showSystemUi = true)
 @Composable
 fun TitleAndImageRowPreview() {
     val painters = (0 until 20).map {
-        painterResource(id = R.drawable.ic_launcher_background)
+        painterResource(id = R.drawable.dummy)
     }
     MainApplicationTheme {
         TitleAndImageRow(
@@ -96,7 +99,6 @@ fun TitleAndImageRowPreview() {
                 }
             },
             onClickItem = {},
-            onClickItemContextMenu = { _, _ ->
-            })
+        )
     }
 }

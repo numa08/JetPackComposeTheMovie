@@ -7,3 +7,9 @@ data class Genre(
     val genre: String,
     val ja: String
 )
+
+@Serializable
+data class GenreTitle(
+    val genre: String,
+    val titleId: String
+)

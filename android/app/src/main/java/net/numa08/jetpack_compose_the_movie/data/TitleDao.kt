@@ -16,6 +16,9 @@ interface TitleDao {
     @Insert
     fun insertTitle(title: Title)
 
+    @Insert
+    fun insertGenreTitle(genreTitle: GenreTitle)
+
     @Query("SELECT * FROM japanese_title")
     fun allTitleWithJapanese(): Flow<List<JapaneseTitle>>
 }

@@ -9,11 +9,9 @@ import dagger.assisted.AssistedInject
 import kotlinx.coroutines.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import net.numa08.jetpack_compose_the_movie.data.GenreMaster
-import net.numa08.jetpack_compose_the_movie.data.OriginalTitle
-import net.numa08.jetpack_compose_the_movie.data.Title
-import net.numa08.jetpack_compose_the_movie.data.TitleDao
+import net.numa08.jetpack_compose_the_movie.data.*
 import net.numa08.jetpack_compose_the_movie.data.json.Genre
+import net.numa08.jetpack_compose_the_movie.data.json.GenreTitle as GenreTitleJson
 import net.numa08.jetpack_compose_the_movie.data.json.TitleAka
 import net.numa08.jetpack_compose_the_movie.data.json.TitleBasic
 
@@ -31,8 +29,22 @@ class InsertInitialDataWorker @AssistedInject constructor(
                 loadTitle()
             }
             listOf(loadGenreTask, loadTitleTask).awaitAll()
+            loadGenreTitle()
             return@coroutineScope Result.success()
         }
+    }
+
+    private suspend fun loadGenreTitle() = withContext(Dispatchers.IO) {
+        @Suppress("BlockingMethodInNonBlockingContext")
+        applicationContext
+            .assets
+            .open("genre_title.jsonl").reader().useLines {
+                it.forEach { line ->
+                    val genre = Json.decodeFromString<GenreTitleJson>(line)
+                    val genreTitle = GenreTitle(genre = genre.genre, titleId = genre.titleId)
+                    titleDao.insertGenreTitle(genreTitle)
+                }
+            }
     }
 
     private suspend fun loadGenre() = withContext(Dispatchers.IO) {
@@ -40,10 +52,10 @@ class InsertInitialDataWorker @AssistedInject constructor(
         applicationContext
             .assets
             .open("genre.jsonl").reader().useLines {
-                it.forEachIndexed { index, line ->
+                it.forEach { line ->
                     val genre = Json.decodeFromString<Genre>(line)
                     val genreMaster =
-                        GenreMaster(id = index, genre = genre.genre, jaGenre = genre.ja)
+                        GenreMaster(genre = genre.genre, jaGenre = genre.ja)
                     titleDao.insertGenre(genreMaster)
                 }
             }
