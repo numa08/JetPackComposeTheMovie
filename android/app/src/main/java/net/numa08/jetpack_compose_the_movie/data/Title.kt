@@ -53,3 +53,19 @@ data class JapaneseTitle(
     val originalTitle: String?,
     val localizedTitle: String?
 )
+
+data class TitleData(
+    @Embedded val originalTitle: OriginalTitle,
+    @Relation(
+        parentColumn = "tconst",
+        entityColumn = "titleId",
+        entity = Title::class
+    )
+    val title: Title,
+    @Relation(
+        parentColumn = "tconst",
+        entityColumn = "titleId",
+        entity = GenreTitle::class
+    )
+    val genres: List<GenreTitle>
+)

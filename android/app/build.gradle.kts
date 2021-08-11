@@ -42,6 +42,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
     }
     buildFeatures {
         compose = true
@@ -68,6 +69,7 @@ dependencies {
         Dependencies.AndroidX.Hilt.worker,
         Dependencies.AndroidX.Navigation.compose,
         Dependencies.AndroidX.Paging.compose,
+        Dependencies.AndroidX.Paging.runtime,
         Dependencies.AndroidX.Room.ktx,
         Dependencies.AndroidX.WorkManager.ktx,
         Dependencies.AndroidX.WorkManager.gcm,

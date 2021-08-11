@@ -1,8 +1,8 @@
 package net.numa08.jetpack_compose_the_movie.widget
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Card
@@ -16,45 +16,51 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingSource
-import androidx.paging.PagingState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import net.numa08.jetpack_compose_the_movie.R
-import net.numa08.jetpack_compose_the_movie.presentation.theme.MainApplicationTheme
+import net.numa08.jetpack_compose_the_movie.data.TitleData
 
-@ExperimentalMaterialApi
 @Composable
 fun TitleAndImageRow(
     title: String,
-    images: Pager<Int, Painter>,
+    images: Pager<Int, TitleData>,
     onClickItem: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val lazyImages = images.flow.collectAsLazyPagingItems()
+    if (lazyImages.itemCount == 0) {
+        return
+    }
     Column(modifier = modifier) {
-        Text(text = title, style = MaterialTheme.typography.h5)
+        Text(
+            text = title,
+            style = MaterialTheme.typography.h5,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
         LazyRow {
-            itemsIndexed(lazyImages) { index, item ->
+            itemsIndexed(lazyImages) { index, _ ->
                 Item(
                     index = index,
-                    painter = item!!,
+                    painter = painterResource(id = R.drawable.dummy),
                     onClickItem = onClickItem,
+                    modifier = Modifier
+                        .padding(start = 4.dp, end = 4.dp)
                 )
             }
         }
     }
 }
 
-@ExperimentalMaterialApi
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun Item(
     index: Int,
     painter: Painter,
     onClickItem: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Card(onClick = { onClickItem(index) }) {
+    Card(onClick = { onClickItem(index) }, modifier = modifier) {
         Image(
             painter = painter,
             contentDescription = null,
@@ -72,33 +78,4 @@ fun ItemPreview() {
         painter = painterResource(id = R.drawable.dummy),
         onClickItem = {},
     )
-}
-
-@ExperimentalMaterialApi
-@Preview(showSystemUi = true)
-@Composable
-fun TitleAndImageRowPreview() {
-    val painters = (0 until 20).map {
-        painterResource(id = R.drawable.dummy)
-    }
-    MainApplicationTheme {
-        TitleAndImageRow(
-            title = "Preview",
-            images = Pager(
-                config = PagingConfig(20)
-            ) {
-                object : PagingSource<Int, Painter>() {
-                    override fun getRefreshKey(state: PagingState<Int, Painter>): Int? = null
-
-                    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Painter> =
-                        LoadResult.Page(
-                            data = painters,
-                            prevKey = null,
-                            nextKey = null
-                        )
-                }
-            },
-            onClickItem = {},
-        )
-    }
 }

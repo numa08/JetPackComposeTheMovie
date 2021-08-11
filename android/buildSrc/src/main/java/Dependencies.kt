@@ -44,6 +44,7 @@ object Dependencies {
         }
         object Paging {
             const val compose = "androidx.paging:paging-compose:1.0.0-alpha12"
+            const val runtime = "androidx.paging:paging-runtime:3.0.0"
         }
         object Room {
             private const val version = "2.3.0"
