@@ -1,4 +1,4 @@
-package net.numa08.jetpack_compose_the_movie.data
+package net.numa08.jetpack_compose_the_movie.database.imdb
 
 import androidx.room.*
 
@@ -68,4 +68,35 @@ data class TitleData(
         entity = GenreTitle::class
     )
     val genres: List<GenreTitle>
+)
+
+@Entity(tableName = "genre_master")
+data class GenreMaster(
+    @PrimaryKey
+    val genre: String,
+    val jaGenre: String
+)
+
+@Entity(
+    tableName = "genre_title",
+    primaryKeys = ["genre", "titleId"],
+    indices = [
+        Index(value = ["titleId"])
+    ],
+    foreignKeys = [
+        ForeignKey(
+            entity = GenreMaster::class,
+            childColumns = ["genre"],
+            parentColumns = ["genre"]
+        ),
+        ForeignKey(
+            entity = OriginalTitle::class,
+            parentColumns = ["tconst"],
+            childColumns = ["titleId"]
+        )
+    ]
+)
+data class GenreTitle(
+    val genre: String,
+    val titleId: String
 )

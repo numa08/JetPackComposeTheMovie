@@ -1,4 +1,4 @@
-package net.numa08.jetpack_compose_the_movie.data
+package net.numa08.jetpack_compose_the_movie.database.imdb
 
 import androidx.paging.DataSource
 import androidx.room.Dao
@@ -8,7 +8,7 @@ import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface TitleDao {
+interface IMDBDao {
     @Insert
     fun insertGenre(genre: GenreMaster)
 

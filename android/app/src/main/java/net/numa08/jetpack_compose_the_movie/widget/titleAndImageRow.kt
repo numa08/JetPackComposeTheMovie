@@ -19,7 +19,7 @@ import androidx.paging.Pager
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import net.numa08.jetpack_compose_the_movie.R
-import net.numa08.jetpack_compose_the_movie.data.TitleData
+import net.numa08.jetpack_compose_the_movie.database.imdb.TitleData
 
 @Composable
 fun GenreAndImageRow(

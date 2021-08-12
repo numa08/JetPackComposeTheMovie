@@ -6,9 +6,9 @@ import androidx.navigation.NavController
 
 @Composable
 fun MovieDetailPage(
-    navController: NavController,
-    viewModel: MovieDetailViewModel,
-    titleId: String
+    @Suppress("UNUSED_PARAMETER") navController: NavController,
+    @Suppress("UNUSED_PARAMETER") viewModel: MovieDetailViewModel,
+    @Suppress("UNUSED_PARAMETER") titleId: String
 ) {
     Text(text = "movie detail")
 }

@@ -10,23 +10,10 @@ plugins {
 }
 
 android {
-    setCompileSdkVersion(31)
-
+    applyCommon(project)
     defaultConfig {
         applicationId = "net.numa08.jetpack_compose_the_movie"
-        minSdk = 21
-        targetSdk = 31
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments["room.schemaLocation"] = "$projectDir/schemas"
-            }
-        }
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -35,10 +22,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-    compileOptions {
-        sourceCompatibility(JavaVersion.VERSION_1_8)
-        targetCompatibility(JavaVersion.VERSION_1_8)
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -76,6 +59,7 @@ dependencies {
         Dependencies.AndroidX.DataStore.dataStore,
         Dependencies.Kotlin.Serialization.json,
         Dependencies.Protobuf.javaLite,
+        project(":data:database")
     ).forEach(::implementation)
     kapt(Dependencies.AndroidX.Room.compiler)
     kapt(Dependencies.AndroidX.Hilt.hiltCompiler)

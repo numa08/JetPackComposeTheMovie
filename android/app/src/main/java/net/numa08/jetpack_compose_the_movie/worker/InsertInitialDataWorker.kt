@@ -19,13 +19,14 @@ import net.numa08.jetpack_compose_the_movie.data.json.Genre
 import net.numa08.jetpack_compose_the_movie.data.json.GenreTitle as GenreTitleJson
 import net.numa08.jetpack_compose_the_movie.data.json.TitleAka
 import net.numa08.jetpack_compose_the_movie.data.json.TitleBasic
+import net.numa08.jetpack_compose_the_movie.database.imdb.*
 
 @Suppress("BlockingMethodInNonBlockingContext")
 @HiltWorker
 class InsertInitialDataWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted workerParams: WorkerParameters,
-    private val titleDao: TitleDao,
+    private val titleDao: IMDBDao,
     private val applicationStateDataStore: DataStore<ApplicationState>
 ) : CoroutineWorker(appContext, workerParams) {
     override suspend fun doWork(): Result {
