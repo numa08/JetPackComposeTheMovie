@@ -11,7 +11,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import net.numa08.jetpack_compose_the_movie.presentation.navigation.MainApplicationNavigation
-import net.numa08.jetpack_compose_the_movie.presentation.navigation.screens
+import net.numa08.jetpack_compose_the_movie.presentation.navigation.bottomNavigation
 import net.numa08.jetpack_compose_the_movie.presentation.theme.MainApplicationTheme
 
 @Composable
@@ -28,7 +28,7 @@ private fun TopPageContent() {
                 BottomNavigation {
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                     val currentDestination = navBackStackEntry?.destination
-                    screens.forEach { screen ->
+                    bottomNavigation.forEach { screen ->
                         BottomNavigationItem(
                             selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                             onClick = {

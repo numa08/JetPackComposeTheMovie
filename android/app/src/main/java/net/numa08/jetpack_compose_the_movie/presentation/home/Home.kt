@@ -2,7 +2,9 @@ package net.numa08.jetpack_compose_the_movie.presentation.home
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
@@ -10,15 +12,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import net.numa08.jetpack_compose_the_movie.widget.TitleAndImageRow
+import net.numa08.jetpack_compose_the_movie.presentation.navigation.BottomNavigationItem
+import net.numa08.jetpack_compose_the_movie.presentation.navigation.Page
+import net.numa08.jetpack_compose_the_movie.widget.GenreAndImageRow
 
 @Composable
-fun HomePage(@Suppress("UNUSED_PARAMETER") navController: NavController, viewModel: HomeViewModel) {
-    HomePageContent(viewModel = viewModel)
+fun HomePage(navController: NavController, viewModel: HomeViewModel) {
+    HomePageContent(navController = navController, viewModel = viewModel)
 }
 
 @Composable
-fun HomePageContent(viewModel: HomeViewModel) {
+fun HomePageContent(navController: NavController, viewModel: HomeViewModel) {
     val genres by viewModel.allGenres.collectAsState(initial = emptyList())
     Scaffold(
         topBar = {
@@ -31,7 +35,11 @@ fun HomePageContent(viewModel: HomeViewModel) {
         LazyColumn {
             items(genres) {
                 val titles = viewModel.titlesInGenre(it)
-                TitleAndImageRow(title = it, images = titles, onClickItem = {})
+                GenreAndImageRow(genre = it, images = titles, onClickItem = { title ->
+                    navController.navigate(Page.MovieDetail.generateRoute(title.originalTitle.titleId)) {
+                        popUpTo(BottomNavigationItem.Home.route)
+                    }
+                })
             }
         }
     }

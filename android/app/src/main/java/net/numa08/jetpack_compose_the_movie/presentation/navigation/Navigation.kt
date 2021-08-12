@@ -14,17 +14,30 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import net.numa08.jetpack_compose_the_movie.presentation.home.HomePage
+import net.numa08.jetpack_compose_the_movie.presentation.movie_detail.MovieDetailPage
 
-sealed class Screen(val route: String, val icon: ImageVector) {
-    object Home : Screen(route = "home", icon = Icons.Outlined.Home)
-    object New : Screen(route = "new", icon = Icons.Outlined.PlayArrow)
-    object Search : Screen(route = "search", icon = Icons.Outlined.Search)
-    object Download : Screen(route = "download", icon = Icons.Outlined.Download)
+sealed class BottomNavigationItem(val route: String, val icon: ImageVector) {
+    object Home : BottomNavigationItem(route = "home", icon = Icons.Outlined.Home)
+    object New : BottomNavigationItem(route = "new", icon = Icons.Outlined.PlayArrow)
+    object Search : BottomNavigationItem(route = "search", icon = Icons.Outlined.Search)
+    object Download : BottomNavigationItem(route = "download", icon = Icons.Outlined.Download)
 }
 
-val screens = listOf(
-    Screen.Home, Screen.New, Screen.Search, Screen.Download
+val bottomNavigation = listOf(
+    BottomNavigationItem.Home,
+    BottomNavigationItem.New,
+    BottomNavigationItem.Search,
+    BottomNavigationItem.Download
 )
+
+sealed class Page {
+    object MovieDetail : Page() {
+        const val argKeyTitleId = "titleId"
+        const val route = "movie/{$argKeyTitleId}"
+
+        fun generateRoute(titleId: String) = "movie/$titleId"
+    }
+}
 
 @Composable
 fun MainApplicationNavigation(
@@ -33,17 +46,25 @@ fun MainApplicationNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route,
+        startDestination = BottomNavigationItem.Home.route,
         modifier = modifier,
     ) {
-        composable(Screen.Home.route) {
+        composable(BottomNavigationItem.Home.route) {
             HomePage(
                 navController = navController,
                 viewModel = hiltViewModel()
             )
         }
-        composable(Screen.New.route) { Text(text = "new") }
-        composable(Screen.Search.route) { Text(text = "search") }
-        composable(Screen.Download.route) { Text(text = "download") }
+        composable(BottomNavigationItem.New.route) { Text(text = "new") }
+        composable(BottomNavigationItem.Search.route) { Text(text = "search") }
+        composable(BottomNavigationItem.Download.route) { Text(text = "download") }
+        composable(Page.MovieDetail.route) {
+            val titleId = requireNotNull(it.arguments?.getString(Page.MovieDetail.argKeyTitleId))
+            MovieDetailPage(
+                navController = navController,
+                viewModel = hiltViewModel(),
+                titleId = titleId
+            )
+        }
     }
 }

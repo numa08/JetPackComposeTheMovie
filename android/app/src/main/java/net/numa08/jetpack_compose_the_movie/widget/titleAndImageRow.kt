@@ -22,28 +22,31 @@ import net.numa08.jetpack_compose_the_movie.R
 import net.numa08.jetpack_compose_the_movie.data.TitleData
 
 @Composable
-fun TitleAndImageRow(
-    title: String,
+fun GenreAndImageRow(
+    genre: String,
     images: Pager<Int, TitleData>,
-    onClickItem: (Int) -> Unit,
+    onClickItem: (TitleData) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val lazyImages = images.flow.collectAsLazyPagingItems()
-    if (lazyImages.itemCount == 0) {
+    val titles = images.flow.collectAsLazyPagingItems()
+    if (titles.itemCount == 0) {
         return
     }
     Column(modifier = modifier) {
         Text(
-            text = title,
+            text = genre,
             style = MaterialTheme.typography.h5,
             modifier = Modifier.padding(bottom = 8.dp)
         )
         LazyRow {
-            itemsIndexed(lazyImages) { index, _ ->
+            itemsIndexed(titles) { index, _ ->
                 Item(
                     index = index,
                     painter = painterResource(id = R.drawable.dummy),
-                    onClickItem = onClickItem,
+                    onClickItem = {
+                        val title = requireNotNull(titles[index])
+                        onClickItem(title)
+                    },
                     modifier = Modifier
                         .padding(start = 4.dp, end = 4.dp)
                 )
