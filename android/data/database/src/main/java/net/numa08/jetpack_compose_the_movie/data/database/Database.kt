@@ -1,8 +1,8 @@
-package net.numa08.jetpack_compose_the_movie.database
+package net.numa08.jetpack_compose_the_movie.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import net.numa08.jetpack_compose_the_movie.database.imdb.*
+import net.numa08.jetpack_compose_the_movie.data.database.imdb.*
 
 @Database(
     entities = [

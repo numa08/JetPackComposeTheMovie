@@ -14,12 +14,12 @@ import kotlinx.coroutines.flow.map
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import net.numa08.jetpack_compose_the_movie.data.*
+import net.numa08.jetpack_compose_the_movie.data.database.imdb.*
 import net.numa08.jetpack_compose_the_movie.data.datastore.ApplicationStateOuterClass.ApplicationState
 import net.numa08.jetpack_compose_the_movie.data.json.Genre
 import net.numa08.jetpack_compose_the_movie.data.json.GenreTitle as GenreTitleJson
 import net.numa08.jetpack_compose_the_movie.data.json.TitleAka
 import net.numa08.jetpack_compose_the_movie.data.json.TitleBasic
-import net.numa08.jetpack_compose_the_movie.database.imdb.*
 
 @Suppress("BlockingMethodInNonBlockingContext")
 @HiltWorker

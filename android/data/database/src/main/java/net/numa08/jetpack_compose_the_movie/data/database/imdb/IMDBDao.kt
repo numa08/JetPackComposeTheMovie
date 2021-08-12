@@ -1,4 +1,4 @@
-package net.numa08.jetpack_compose_the_movie.database.imdb
+package net.numa08.jetpack_compose_the_movie.data.database.imdb
 
 import androidx.paging.DataSource
 import androidx.room.Dao

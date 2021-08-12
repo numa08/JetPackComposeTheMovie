@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":data:datastore")
+
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -8,5 +11,8 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "JetPackComposeTheMovie"
-include(":app")
-include(":data:database")
+listOf(
+    ":app",
+    ":data:database",
+    ":data:datastore",
+).forEach(::include)

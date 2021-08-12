@@ -5,9 +5,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import net.numa08.jetpack_compose_the_movie.database.imdb.IMDBDao
-import net.numa08.jetpack_compose_the_movie.database.imdb.JapaneseTitle
-import net.numa08.jetpack_compose_the_movie.database.imdb.TitleData
+import net.numa08.jetpack_compose_the_movie.data.database.imdb.IMDBDao
+import net.numa08.jetpack_compose_the_movie.data.database.imdb.JapaneseTitle
+import net.numa08.jetpack_compose_the_movie.data.database.imdb.TitleData
 import javax.inject.Inject
 
 @HiltViewModel

@@ -59,7 +59,8 @@ dependencies {
         Dependencies.AndroidX.DataStore.dataStore,
         Dependencies.Kotlin.Serialization.json,
         Dependencies.Protobuf.javaLite,
-        project(":data:database")
+        project(":data:database"),
+        project(":data:datastore"),
     ).forEach(::implementation)
     kapt(Dependencies.AndroidX.Room.compiler)
     kapt(Dependencies.AndroidX.Hilt.hiltCompiler)
