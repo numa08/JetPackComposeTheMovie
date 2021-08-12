@@ -1,0 +1,248 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "f87780f679dbefbbdc4d32929a22284b",
+    "entities": [
+      {
+        "tableName": "genre_master",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`genre` TEXT NOT NULL, `jaGenre` TEXT NOT NULL, PRIMARY KEY(`genre`))",
+        "fields": [
+          {
+            "fieldPath": "genre",
+            "columnName": "genre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "jaGenre",
+            "columnName": "jaGenre",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "genre"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "title_aka",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `titleId` TEXT NOT NULL, `title` TEXT, `language` TEXT, `region` TEXT, `isOriginalTitle` INTEGER NOT NULL, FOREIGN KEY(`titleId`) REFERENCES `title`(`tconst`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "titleId",
+            "columnName": "titleId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "language",
+            "columnName": "language",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "region",
+            "columnName": "region",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isOriginalTitle",
+            "columnName": "isOriginalTitle",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_title_aka_titleId_language_region",
+            "unique": false,
+            "columnNames": [
+              "titleId",
+              "language",
+              "region"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_title_aka_titleId_language_region` ON `${TABLE_NAME}` (`titleId`, `language`, `region`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "title",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "titleId"
+            ],
+            "referencedColumns": [
+              "tconst"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "title",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tconst` TEXT NOT NULL, `primaryTitle` TEXT, `originalTitle` TEXT, `isAdult` INTEGER NOT NULL, `startYear` INTEGER, `endYear` INTEGER, `runtimeMinutes` INTEGER, `titleType` TEXT, PRIMARY KEY(`tconst`))",
+        "fields": [
+          {
+            "fieldPath": "titleId",
+            "columnName": "tconst",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "primaryTitle",
+            "columnName": "primaryTitle",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "originalTitle",
+            "columnName": "originalTitle",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isAdult",
+            "columnName": "isAdult",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startYear",
+            "columnName": "startYear",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "endYear",
+            "columnName": "endYear",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "runtimeMinutes",
+            "columnName": "runtimeMinutes",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "titleType",
+            "columnName": "titleType",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "tconst"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_title_tconst",
+            "unique": false,
+            "columnNames": [
+              "tconst"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_title_tconst` ON `${TABLE_NAME}` (`tconst`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "genre_title",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`genre` TEXT NOT NULL, `titleId` TEXT NOT NULL, PRIMARY KEY(`genre`, `titleId`), FOREIGN KEY(`genre`) REFERENCES `genre_master`(`genre`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`titleId`) REFERENCES `title`(`tconst`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "genre",
+            "columnName": "genre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "titleId",
+            "columnName": "titleId",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "genre",
+            "titleId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_genre_title_titleId",
+            "unique": false,
+            "columnNames": [
+              "titleId"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_genre_title_titleId` ON `${TABLE_NAME}` (`titleId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "genre_master",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "genre"
+            ],
+            "referencedColumns": [
+              "genre"
+            ]
+          },
+          {
+            "table": "title",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "titleId"
+            ],
+            "referencedColumns": [
+              "tconst"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [
+      {
+        "viewName": "japanese_title",
+        "createSql": "CREATE VIEW `${VIEW_NAME}` AS SELECT original_title.titleid AS titleId, original_title.title AS originalTitle, localized_title.title AS localizedTitle FROM(SELECT * FROM title_aka WHERE isOriginalTitle = 1) AS original_title LEFT JOIN (SELECT * FROM title_aka WHERE language = \"ja\" ) AS localized_title ON original_title.titleid = localized_title.titleid"
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f87780f679dbefbbdc4d32929a22284b')"
+    ]
+  }
+}

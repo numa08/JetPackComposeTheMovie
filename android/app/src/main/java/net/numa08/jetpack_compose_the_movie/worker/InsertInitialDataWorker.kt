@@ -11,15 +11,10 @@ import dagger.assisted.AssistedInject
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
 import net.numa08.jetpack_compose_the_movie.data.*
 import net.numa08.jetpack_compose_the_movie.data.database.imdb.*
 import net.numa08.jetpack_compose_the_movie.data.datastore.ApplicationStateOuterClass.ApplicationState
-import net.numa08.jetpack_compose_the_movie.data.json.Genre
-import net.numa08.jetpack_compose_the_movie.data.json.GenreTitle as GenreTitleJson
-import net.numa08.jetpack_compose_the_movie.data.json.TitleAka
-import net.numa08.jetpack_compose_the_movie.data.json.TitleBasic
+import net.numa08.jetpack_compose_the_movie.data.json.JsonType
 
 @Suppress("BlockingMethodInNonBlockingContext")
 @HiltWorker
@@ -60,7 +55,7 @@ class InsertInitialDataWorker @AssistedInject constructor(
             .assets
             .open("genre_title.jsonl").reader().useLines {
                 it.forEach { line ->
-                    val genre = Json.decodeFromString<GenreTitleJson>(line)
+                    val genre = JsonType.fromJsonString<JsonType.GenreTitle>(line)
                     val genreTitle = GenreTitle(genre = genre.genre, titleId = genre.titleId)
                     titleDao.insertGenreTitle(genreTitle)
                 }
@@ -73,7 +68,7 @@ class InsertInitialDataWorker @AssistedInject constructor(
             .assets
             .open("genre.jsonl").reader().useLines {
                 it.forEach { line ->
-                    val genre = Json.decodeFromString<Genre>(line)
+                    val genre = JsonType.fromJsonString<JsonType.Genre>(line)
                     val genreMaster =
                         GenreMaster(genre = genre.genre, jaGenre = genre.ja)
                     titleDao.insertGenre(genreMaster)
@@ -89,7 +84,7 @@ class InsertInitialDataWorker @AssistedInject constructor(
             .reader()
             .useLines {
                 it.forEach { line ->
-                    val titleBasic = Json.decodeFromString<TitleBasic>(line)
+                    val titleBasic = JsonType.fromJsonString<JsonType.TitleBasic>(line)
                     val originalTitle = OriginalTitle(
                         titleId = titleBasic.tconst,
                         primaryTitle = titleBasic.primaryTitle,
@@ -113,7 +108,7 @@ class InsertInitialDataWorker @AssistedInject constructor(
             .reader()
             .useLines {
                 it.forEach { line ->
-                    val titleAka = Json.decodeFromString<TitleAka>(line)
+                    val titleAka = JsonType.fromJsonString<JsonType.TitleAka>(line)
                     val title = Title(
                         titleId = titleAka.titleId,
                         title = titleAka.title,

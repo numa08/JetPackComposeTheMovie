@@ -61,6 +61,7 @@ dependencies {
         Dependencies.Protobuf.javaLite,
         project(":data:database"),
         project(":data:datastore"),
+        project(":data:json"),
     ).forEach(::implementation)
     kapt(Dependencies.AndroidX.Room.compiler)
     kapt(Dependencies.AndroidX.Hilt.hiltCompiler)

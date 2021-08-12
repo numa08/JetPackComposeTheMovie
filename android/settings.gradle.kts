@@ -1,5 +1,11 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":data:json")
+
+
+include(":feature:worker")
+
+
 include(":data:datastore")
 
 
@@ -15,4 +21,5 @@ listOf(
     ":app",
     ":data:database",
     ":data:datastore",
+    ":data:json",
 ).forEach(::include)
