@@ -1,4 +1,4 @@
-package net.numa08.jetpack_compose_the_movie.presentation.movie_detail
+package net.numa08.jetpack_compose_the_movie.feature.ui.presentation.movie_detail
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

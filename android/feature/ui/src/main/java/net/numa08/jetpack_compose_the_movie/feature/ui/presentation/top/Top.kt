@@ -1,4 +1,4 @@
-package net.numa08.jetpack_compose_the_movie.presentation.top
+package net.numa08.jetpack_compose_the_movie.feature.ui.presentation.top
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
@@ -10,9 +10,9 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import net.numa08.jetpack_compose_the_movie.presentation.navigation.MainApplicationNavigation
-import net.numa08.jetpack_compose_the_movie.presentation.navigation.bottomNavigation
-import net.numa08.jetpack_compose_the_movie.presentation.theme.MainApplicationTheme
+import net.numa08.jetpack_compose_the_movie.feature.ui.presentation.navigation.MainApplicationNavigation
+import net.numa08.jetpack_compose_the_movie.feature.ui.presentation.navigation.bottomNavigation
+import net.numa08.jetpack_compose_the_movie.feature.ui.presentation.theme.MainApplicationTheme
 
 @Composable
 fun TopPage() {

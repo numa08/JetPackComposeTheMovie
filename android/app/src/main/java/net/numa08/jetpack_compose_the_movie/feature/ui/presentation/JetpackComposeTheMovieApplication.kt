@@ -1,4 +1,4 @@
-package net.numa08.jetpack_compose_the_movie.presentation
+package net.numa08.jetpack_compose_the_movie.feature.ui.presentation
 
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory

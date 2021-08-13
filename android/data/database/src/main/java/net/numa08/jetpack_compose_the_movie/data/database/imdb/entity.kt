@@ -1,9 +1,10 @@
 package net.numa08.jetpack_compose_the_movie.data.database.imdb
 
+import androidx.paging.DataSource
 import androidx.room.*
 
 @Entity(tableName = "title")
-data class OriginalTitle(
+data class OriginalTitleEntity(
     @PrimaryKey
     @ColumnInfo(name = "tconst", index = true)
     val titleId: String,
@@ -22,12 +23,12 @@ data class OriginalTitle(
         Index(value = ["titleId", "language", "region"])
     ],
     foreignKeys = [ForeignKey(
-        entity = OriginalTitle::class,
+        entity = OriginalTitleEntity::class,
         parentColumns = ["tconst"],
         childColumns = ["titleId"],
     )]
 )
-data class Title(
+data class TitleEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val titleId: String,
@@ -48,30 +49,30 @@ data class Title(
             "(SELECT * FROM title_aka WHERE language = \"ja\" ) AS localized_title ON original_title.titleid = localized_title.titleid",
     viewName = "japanese_title"
 )
-data class JapaneseTitle(
+data class JapaneseTitleView(
     val titleId: String,
     val originalTitle: String?,
     val localizedTitle: String?
 )
 
 data class TitleData(
-    @Embedded val originalTitle: OriginalTitle,
+    @Embedded val originalTitle: OriginalTitleEntity,
     @Relation(
         parentColumn = "tconst",
         entityColumn = "titleId",
-        entity = Title::class
+        entity = TitleEntity::class
     )
-    val title: Title,
+    val title: TitleEntity,
     @Relation(
         parentColumn = "tconst",
         entityColumn = "titleId",
-        entity = GenreTitle::class
+        entity = GenreTitleEntity::class
     )
-    val genres: List<GenreTitle>
+    val genres: List<GenreTitleEntity>
 )
 
 @Entity(tableName = "genre_master")
-data class GenreMaster(
+data class GenreMasterEntity(
     @PrimaryKey
     val genre: String,
     val jaGenre: String
@@ -85,18 +86,18 @@ data class GenreMaster(
     ],
     foreignKeys = [
         ForeignKey(
-            entity = GenreMaster::class,
+            entity = GenreMasterEntity::class,
             childColumns = ["genre"],
             parentColumns = ["genre"]
         ),
         ForeignKey(
-            entity = OriginalTitle::class,
+            entity = OriginalTitleEntity::class,
             parentColumns = ["tconst"],
             childColumns = ["titleId"]
         )
     ]
 )
-data class GenreTitle(
+data class GenreTitleEntity(
     val genre: String,
     val titleId: String
 )

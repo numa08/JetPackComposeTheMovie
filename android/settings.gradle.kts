@@ -1,20 +1,4 @@
 @file:Suppress("UnstableApiUsage")
-
-include(":domain:repository")
-
-
-include(":domain:data")
-
-
-include(":data:json")
-
-
-include(":feature:worker")
-
-
-include(":data:datastore")
-
-
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -29,6 +13,7 @@ listOf(
     ":data:datastore",
     ":data:json",
     ":feature:worker",
+    ":feature:ui",
     ":domain:data",
     ":domain:repository"
 ).forEach(::include)

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".presentation.JetpackComposeTheMovieApplication"
+        android:name="net.numa08.jetpack_compose_the_movie.feature.ui.presentation.JetpackComposeTheMovieApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +16,7 @@
             android:authorities="${applicationId}.workmanager-init"
             tools:node="remove" />
         <activity
-            android:name=".presentation.MainActivity"
+            android:name="net.numa08.jetpack_compose_the_movie.feature.ui.presentation.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.JetPackComposeTheMovie.NoActionBar">
             <intent-filter>

@@ -34,9 +34,9 @@ dependencies {
         Dependencies.Protobuf.javaLite,
         Dependencies.AndroidX.DataStore.dataStore,
         project(":data:datastore"),
+        project(":data:database"),
         project(":domain:data")
     ).forEach(::implementation)
-    kapt(Dependencies.AndroidX.Room.compiler)
     kapt(Dependencies.AndroidX.Hilt.hiltCompiler)
     kapt(Dependencies.AndroidX.Hilt.compiler)
 }

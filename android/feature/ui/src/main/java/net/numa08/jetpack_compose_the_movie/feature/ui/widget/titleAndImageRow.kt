@@ -1,4 +1,4 @@
-package net.numa08.jetpack_compose_the_movie.widget
+package net.numa08.jetpack_compose_the_movie.feature.ui.widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -15,21 +15,22 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.paging.Pager
+import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
-import net.numa08.jetpack_compose_the_movie.R
-import net.numa08.jetpack_compose_the_movie.data.database.imdb.TitleData
+import kotlinx.coroutines.flow.Flow
+import net.numa08.jetpack_compose_the_movie.domain.data.title.Poster
+import net.numa08.jetpack_compose_the_movie.feature.ui.R
 
 @Composable
-fun GenreAndImageRow(
+fun GenreAndPosterRow(
     genre: String,
-    images: Pager<Int, TitleData>,
-    onClickItem: (TitleData) -> Unit,
+    posters: Flow<PagingData<Poster>>,
+    onClickItem: (Poster) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val titles = images.flow.collectAsLazyPagingItems()
-    if (titles.itemCount == 0) {
+    val posterItems = posters.collectAsLazyPagingItems()
+    if (posterItems.itemCount == 0) {
         return
     }
     Column(modifier = modifier) {
@@ -39,13 +40,13 @@ fun GenreAndImageRow(
             modifier = Modifier.padding(bottom = 8.dp)
         )
         LazyRow {
-            itemsIndexed(titles) { index, _ ->
+            itemsIndexed(posterItems) { index, _ ->
                 Item(
                     index = index,
                     painter = painterResource(id = R.drawable.dummy),
                     onClickItem = {
-                        val title = requireNotNull(titles[index])
-                        onClickItem(title)
+                        val poster = requireNotNull(posterItems[index])
+                        onClickItem(poster)
                     },
                     modifier = Modifier
                         .padding(start = 4.dp, end = 4.dp)

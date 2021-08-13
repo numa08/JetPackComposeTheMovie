@@ -8,6 +8,7 @@
       <module name="JetPackComposeTheMovie.data.datastore" target="11" />
       <module name="JetPackComposeTheMovie.data.json" target="11" />
       <module name="JetPackComposeTheMovie.domain.repository" target="11" />
+      <module name="JetPackComposeTheMovie.feature.ui" target="11" />
       <module name="JetPackComposeTheMovie.feature.worker" target="11" />
     </bytecodeTargetLevel>
   </component>

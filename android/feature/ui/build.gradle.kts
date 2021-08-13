@@ -1,16 +1,12 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    id("com.google.protobuf") version "0.8.17"
 }
 
 android {
     applyCommon(project)
-    defaultConfig {
-        applicationId = "net.numa08.jetpack_compose_the_movie"
-    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -46,24 +42,12 @@ dependencies {
         Dependencies.AndroidX.Hilt.compose,
         Dependencies.AndroidX.Hilt.hilt,
         Dependencies.AndroidX.Hilt.viewModel,
-        Dependencies.AndroidX.Hilt.worker,
         Dependencies.AndroidX.Navigation.compose,
         Dependencies.AndroidX.Paging.compose,
         Dependencies.AndroidX.Paging.runtime,
-        Dependencies.AndroidX.Room.ktx,
-        Dependencies.AndroidX.WorkManager.ktx,
-        Dependencies.AndroidX.WorkManager.gcm,
-        Dependencies.AndroidX.DataStore.dataStore,
-        Dependencies.Kotlin.Serialization.json,
-        project(":data:database"),
-        project(":data:datastore"),
-        project(":data:json"),
-        project(":feature:worker"),
-        project(":feature:ui"),
         project(":domain:data"),
         project(":domain:repository"),
     ).forEach(::implementation)
-    kapt(Dependencies.AndroidX.Room.compiler)
     kapt(Dependencies.AndroidX.Hilt.hiltCompiler)
     kapt(Dependencies.AndroidX.Hilt.compiler)
     debugImplementation(Dependencies.AndroidX.Compose.debugTools)

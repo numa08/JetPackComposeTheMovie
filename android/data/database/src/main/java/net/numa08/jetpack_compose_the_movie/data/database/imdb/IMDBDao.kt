@@ -10,24 +10,25 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface IMDBDao {
     @Insert
-    fun insertGenre(genre: GenreMaster)
+    fun insertGenre(genre: GenreMasterEntity)
 
     @Insert
-    fun insertOriginalTitle(originalTitle: OriginalTitle)
+    fun insertOriginalTitle(originalTitle: OriginalTitleEntity)
 
     @Insert
-    fun insertTitle(title: Title)
+    fun insertTitle(title: TitleEntity)
 
     @Insert
-    fun insertGenreTitle(genreTitle: GenreTitle)
+    fun insertGenreTitle(genreTitle: GenreTitleEntity)
 
     @Query("SELECT * FROM japanese_title")
-    fun allTitleWithJapanese(): Flow<List<JapaneseTitle>>
+    fun allTitleWithJapanese(): Flow<List<JapaneseTitleView>>
 
     @Transaction
     @Query("SELECT * FROM title WHERE tconst IN (SELECT titleId FROM genre_title WHERE genre is :genre)")
     fun titlesInGenre(genre: String): DataSource.Factory<Int, TitleData>
 
-    @Query("SELECT genre FROM genre_master")
-    fun allGenres(): Flow<List<String>>
+    @Query("SELECT * FROM genre_master")
+    fun allGenres(): Flow<List<GenreMasterEntity>>
+
 }

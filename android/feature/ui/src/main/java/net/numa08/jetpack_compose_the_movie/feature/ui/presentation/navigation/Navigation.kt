@@ -1,4 +1,4 @@
-package net.numa08.jetpack_compose_the_movie.presentation.navigation
+package net.numa08.jetpack_compose_the_movie.feature.ui.presentation.navigation
 
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -13,8 +13,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import net.numa08.jetpack_compose_the_movie.presentation.home.HomePage
-import net.numa08.jetpack_compose_the_movie.presentation.movie_detail.MovieDetailPage
+import net.numa08.jetpack_compose_the_movie.feature.ui.presentation.home.HomePage
+import net.numa08.jetpack_compose_the_movie.feature.ui.presentation.movie_detail.MovieDetailPage
 
 sealed class BottomNavigationItem(val route: String, val icon: ImageVector) {
     object Home : BottomNavigationItem(route = "home", icon = Icons.Outlined.Home)

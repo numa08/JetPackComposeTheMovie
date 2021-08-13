@@ -6,14 +6,14 @@ import net.numa08.jetpack_compose_the_movie.data.database.imdb.*
 
 @Database(
     entities = [
-        GenreMaster::class,
-        Title::class,
-        OriginalTitle::class,
-        GenreTitle::class,
+        GenreMasterEntity::class,
+        TitleEntity::class,
+        OriginalTitleEntity::class,
+        GenreTitleEntity::class,
     ],
     version = 1,
     exportSchema = true,
-    views = [JapaneseTitle::class]
+    views = [JapaneseTitleView::class]
 )
 abstract class Database: RoomDatabase() {
     abstract fun imdbDao(): IMDBDao

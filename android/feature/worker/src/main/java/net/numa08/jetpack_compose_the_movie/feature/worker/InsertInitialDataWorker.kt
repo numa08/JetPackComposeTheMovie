@@ -54,7 +54,7 @@ class InsertInitialDataWorker @AssistedInject constructor(
             .open("genre_title.jsonl").reader().useLines {
                 it.forEach { line ->
                     val genre = JsonType.fromJsonString<JsonType.GenreTitle>(line)
-                    val genreTitle = GenreTitle(genre = genre.genre, titleId = genre.titleId)
+                    val genreTitle = GenreTitleEntity(genre = genre.genre, titleId = genre.titleId)
                     titleDao.insertGenreTitle(genreTitle)
                 }
             }
@@ -68,7 +68,7 @@ class InsertInitialDataWorker @AssistedInject constructor(
                 it.forEach { line ->
                     val genre = JsonType.fromJsonString<JsonType.Genre>(line)
                     val genreMaster =
-                        GenreMaster(genre = genre.genre, jaGenre = genre.ja)
+                        GenreMasterEntity(genre = genre.genre, jaGenre = genre.ja)
                     titleDao.insertGenre(genreMaster)
                 }
             }
@@ -83,7 +83,7 @@ class InsertInitialDataWorker @AssistedInject constructor(
             .useLines {
                 it.forEach { line ->
                     val titleBasic = JsonType.fromJsonString<JsonType.TitleBasic>(line)
-                    val originalTitle = OriginalTitle(
+                    val originalTitle = OriginalTitleEntity(
                         titleId = titleBasic.tconst,
                         primaryTitle = titleBasic.primaryTitle,
                         originalTitle = titleBasic.originalTitle,
@@ -107,7 +107,7 @@ class InsertInitialDataWorker @AssistedInject constructor(
             .useLines {
                 it.forEach { line ->
                     val titleAka = JsonType.fromJsonString<JsonType.TitleAka>(line)
-                    val title = Title(
+                    val title = TitleEntity(
                         titleId = titleAka.titleId,
                         title = titleAka.title,
                         language = titleAka.language,
