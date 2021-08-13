@@ -31,8 +31,10 @@ dependencies {
         Dependencies.AndroidX.WorkManager.ktx,
         Dependencies.AndroidX.WorkManager.gcm,
         Dependencies.AndroidX.DataStore.dataStore,
+        Dependencies.Protobuf.protobufLite,
         project(":data:datastore"),
-        project(":data:database")
+        project(":data:database"),
+        project(":data:json")
     ).forEach(::implementation)
     kapt(Dependencies.AndroidX.Hilt.hiltCompiler)
     kapt(Dependencies.AndroidX.Hilt.compiler)

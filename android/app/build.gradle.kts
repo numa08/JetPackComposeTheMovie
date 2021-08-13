@@ -62,6 +62,7 @@ dependencies {
         project(":data:database"),
         project(":data:datastore"),
         project(":data:json"),
+        project("feature:worker"),
     ).forEach(::implementation)
     kapt(Dependencies.AndroidX.Room.compiler)
     kapt(Dependencies.AndroidX.Hilt.hiltCompiler)
