@@ -6,7 +6,7 @@ import androidx.work.Configuration
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import dagger.hilt.android.HiltAndroidApp
-import net.numa08.jetpack_compose_the_movie.worker.InsertInitialDataWorker
+import net.numa08.jetpack_compose_the_movie.feature.worker.InsertInitialDataWorker
 import javax.inject.Inject
 
 @HiltAndroidApp

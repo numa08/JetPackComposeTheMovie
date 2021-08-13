@@ -22,4 +22,5 @@ listOf(
     ":data:database",
     ":data:datastore",
     ":data:json",
+    ":feature:worker",
 ).forEach(::include)

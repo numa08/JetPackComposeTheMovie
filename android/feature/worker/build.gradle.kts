@@ -31,7 +31,7 @@ dependencies {
         Dependencies.AndroidX.WorkManager.ktx,
         Dependencies.AndroidX.WorkManager.gcm,
         Dependencies.AndroidX.DataStore.dataStore,
-        Dependencies.Protobuf.protobufLite,
+        Dependencies.Protobuf.javaLite,
         project(":data:datastore"),
         project(":data:database"),
         project(":data:json")
