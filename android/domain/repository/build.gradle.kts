@@ -26,15 +26,17 @@ android {
 dependencies {
     listOf(
         Dependencies.AndroidX.Core.coreKtx,
+        Dependencies.AndroidX.Room.ktx,
+        Dependencies.AndroidX.Paging.compose,
+        Dependencies.AndroidX.Paging.runtime,
         Dependencies.AndroidX.Hilt.hilt,
-        Dependencies.AndroidX.Hilt.worker,
-        Dependencies.AndroidX.WorkManager.ktx,
-        Dependencies.AndroidX.WorkManager.gcm,
-        project(":data:database"),
-        project(":data:json"),
-        project(":domain:data"),
-        project(":domain:repository"),
+        Dependencies.AndroidX.Paging.runtime,
+        Dependencies.Protobuf.javaLite,
+        Dependencies.AndroidX.DataStore.dataStore,
+        project(":data:datastore"),
+        project(":domain:data")
     ).forEach(::implementation)
+    kapt(Dependencies.AndroidX.Room.compiler)
     kapt(Dependencies.AndroidX.Hilt.hiltCompiler)
     kapt(Dependencies.AndroidX.Hilt.compiler)
 }

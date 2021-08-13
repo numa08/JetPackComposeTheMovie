@@ -1,5 +1,11 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":domain:repository")
+
+
+include(":domain:data")
+
+
 include(":data:json")
 
 
@@ -23,4 +29,6 @@ listOf(
     ":data:datastore",
     ":data:json",
     ":feature:worker",
+    ":domain:data",
+    ":domain:repository"
 ).forEach(::include)
