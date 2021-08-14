@@ -81,6 +81,8 @@ object Dependencies {
         object Serialization {
             const val json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
         }
+
+        const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
     }
 
     object Protobuf {
@@ -88,5 +90,11 @@ object Dependencies {
         const val protobuf = "com.google.protobuf:protoc:$version"
         const val javaLite = "com.google.protobuf:protobuf-javalite:$version"
         const val protobufLite = "com.google.protobuf:protobuf-lite:3.0.1"
+    }
+
+    object Retrofit {
+        const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
+        const val kotlinxSerialization =
+            "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
     }
 }

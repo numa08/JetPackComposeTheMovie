@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f87780f679dbefbbdc4d32929a22284b",
+    "identityHash": "5f6ff77dd83816bb5bef340d419b0362",
     "entities": [
       {
         "tableName": "genre_master",
@@ -232,6 +232,32 @@
             ]
           }
         ]
+      },
+      {
+        "tableName": "poster",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`titleId` TEXT NOT NULL, `poster` TEXT NOT NULL, PRIMARY KEY(`titleId`))",
+        "fields": [
+          {
+            "fieldPath": "titleId",
+            "columnName": "titleId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "poster",
+            "columnName": "poster",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "titleId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [
@@ -242,7 +268,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f87780f679dbefbbdc4d32929a22284b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5f6ff77dd83816bb5bef340d419b0362')"
     ]
   }
 }

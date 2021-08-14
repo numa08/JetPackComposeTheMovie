@@ -12,6 +12,7 @@ listOf(
     ":data:database",
     ":data:datastore",
     ":data:json",
+    ":data:http",
     ":feature:worker",
     ":feature:ui",
     ":domain:data",
