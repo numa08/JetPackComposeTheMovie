@@ -45,6 +45,7 @@ dependencies {
         Dependencies.AndroidX.Navigation.compose,
         Dependencies.AndroidX.Paging.compose,
         Dependencies.AndroidX.Paging.runtime,
+        Dependencies.Coil.compose,
         project(":domain:data"),
         project(":domain:repository"),
     ).forEach(::implementation)

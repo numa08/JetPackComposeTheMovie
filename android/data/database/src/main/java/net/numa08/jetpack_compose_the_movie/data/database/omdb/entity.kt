@@ -6,5 +6,5 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "poster")
 data class Poster(
     @PrimaryKey val titleId: String,
-    val poster: String
+    val poster: String?
 )

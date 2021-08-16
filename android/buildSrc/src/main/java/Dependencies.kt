@@ -97,4 +97,8 @@ object Dependencies {
         const val kotlinxSerialization =
             "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
     }
+
+    object Coil {
+        const val compose = "io.coil-kt:coil-compose:1.3.2"
+    }
 }

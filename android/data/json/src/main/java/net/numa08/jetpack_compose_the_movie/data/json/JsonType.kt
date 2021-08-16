@@ -94,7 +94,8 @@ sealed class JsonType {
         val awards: String,
 
         @SerialName("Poster")
-        val poster: String,
+        @Serializable(with = NASerializer::class)
+        val poster: String?,
 
         @SerialName("Ratings")
         val ratings: List<Rating>,

@@ -1,6 +1,7 @@
 package net.numa08.jetpack_compose_the_movie.data.database.imdb
 
 import androidx.room.*
+import net.numa08.jetpack_compose_the_movie.data.database.omdb.Poster
 
 @Entity(tableName = "title")
 data class OriginalTitleEntity(
@@ -67,7 +68,13 @@ data class TitleData(
         entityColumn = "titleId",
         entity = GenreTitleEntity::class
     )
-    val genres: List<GenreTitleEntity>
+    val genres: List<GenreTitleEntity>,
+    @Relation(
+        parentColumn = "tconst",
+        entityColumn = "titleId",
+        entity = Poster::class
+    )
+    val poster: Poster?
 )
 
 @Entity(tableName = "genre_master")

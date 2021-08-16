@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
+import coil.compose.rememberImagePainter
 import kotlinx.coroutines.flow.Flow
 import net.numa08.jetpack_compose_the_movie.domain.data.title.Poster
 import net.numa08.jetpack_compose_the_movie.feature.ui.R
@@ -40,12 +41,18 @@ fun GenreAndPosterRow(
             modifier = Modifier.padding(bottom = 8.dp)
         )
         LazyRow {
-            itemsIndexed(posterItems) { index, _ ->
+            itemsIndexed(posterItems) { index, item ->
+                val poster = requireNotNull(item)
+                val posterUrl = poster.posterUrl.toString()
+                val painter = if (poster.posterUrl == null) {
+                    painterResource(id = R.drawable.dummy)
+                } else {
+                    rememberImagePainter(data = posterUrl)
+                }
                 Item(
                     index = index,
-                    painter = painterResource(id = R.drawable.dummy),
+                    painter = painter,
                     onClickItem = {
-                        val poster = requireNotNull(posterItems[index])
                         onClickItem(poster)
                     },
                     modifier = Modifier

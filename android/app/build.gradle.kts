@@ -58,6 +58,7 @@ dependencies {
         project(":data:database"),
         project(":data:datastore"),
         project(":data:json"),
+        project(":data:http"),
         project(":feature:worker"),
         project(":feature:ui"),
         project(":domain:data"),

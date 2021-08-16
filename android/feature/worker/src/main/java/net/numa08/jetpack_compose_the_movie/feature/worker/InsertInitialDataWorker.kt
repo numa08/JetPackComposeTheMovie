@@ -23,7 +23,7 @@ class InsertInitialDataWorker @AssistedInject constructor(
     private val applicationStateRepository: ApplicationStateRepository
 ) : CoroutineWorker(appContext, workerParams) {
     override suspend fun doWork(): Result {
-        val currentState = runBlocking { applicationStateRepository.state.first() }
+        val currentState = applicationStateRepository.state.first()
         val isInitialDataInserted = currentState.isInitialDataInserted
         if (isInitialDataInserted) {
             return Result.success(workDataOf("result" to "noop"))

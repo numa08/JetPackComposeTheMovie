@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import net.numa08.jetpack_compose_the_movie.data.database.Database
 import net.numa08.jetpack_compose_the_movie.data.database.imdb.IMDBDao
+import net.numa08.jetpack_compose_the_movie.data.database.omdb.OMDBDao
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -23,4 +24,7 @@ object DatabaseModule {
 
     @Provides
     fun providesIMDBDao(database: Database): IMDBDao = database.imdbDao()
+
+    @Provides
+    fun providesOMDBDao(database: Database): OMDBDao = database.omdbDao()
 }

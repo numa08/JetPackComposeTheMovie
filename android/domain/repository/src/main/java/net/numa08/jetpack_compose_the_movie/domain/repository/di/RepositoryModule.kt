@@ -6,7 +6,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import net.numa08.jetpack_compose_the_movie.data.database.imdb.IMDBDao
+import net.numa08.jetpack_compose_the_movie.data.database.omdb.OMDBDao
 import net.numa08.jetpack_compose_the_movie.data.datastore.ApplicationStateOuterClass
+import net.numa08.jetpack_compose_the_movie.data.http.omdb.OMDbService
 import net.numa08.jetpack_compose_the_movie.domain.repository.ApplicationStateRepository
 import net.numa08.jetpack_compose_the_movie.domain.repository.TitleRepository
 import javax.inject.Singleton
@@ -22,6 +24,14 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideTitleRepository(imdbDao: IMDBDao): TitleRepository =
-        TitleRepository(imdbDao = imdbDao)
+    fun provideTitleRepository(
+        imdbDao: IMDBDao,
+        omdbDao: OMDBDao,
+        omDbService: OMDbService
+    ): TitleRepository =
+        TitleRepository(
+            imdbDao = imdbDao,
+            omdbDao = omdbDao,
+            omDbService = omDbService
+        )
 }
