@@ -3,7 +3,7 @@
 object Dependencies {
     object Android {
         object BuildTools {
-            private const val version = "7.0.1"
+            private const val version = "7.0.2"
             const val classPath = "com.android.tools.build:gradle:$version"
         }
     }
