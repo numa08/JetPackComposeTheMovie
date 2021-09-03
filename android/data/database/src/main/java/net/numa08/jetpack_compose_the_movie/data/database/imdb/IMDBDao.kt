@@ -28,7 +28,20 @@ interface IMDBDao {
     @Query("SELECT * FROM title WHERE tconst IN (SELECT titleId FROM genre_title WHERE genre is :genre)")
     fun titlesInGenre(genre: String): DataSource.Factory<Int, TitleData>
 
-    @Query("SELECT * FROM genre_master")
-    fun allGenres(): Flow<List<GenreMasterEntity>>
-
+    @Query("""
+    SELECT
+        * 
+    FROM
+        genre_master 
+    WHERE
+        genre  IN (
+            SELECT
+                genre                 
+            FROM
+                genre_title                 
+            GROUP BY
+                genre
+        )
+    """)
+    fun genresHasTitles(): Flow<List<GenreMasterEntity>>
 }

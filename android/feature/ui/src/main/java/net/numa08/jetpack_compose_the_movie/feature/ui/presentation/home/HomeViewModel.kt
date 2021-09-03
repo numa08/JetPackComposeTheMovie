@@ -1,9 +1,11 @@
 package net.numa08.jetpack_compose_the_movie.feature.ui.presentation.home
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import net.numa08.jetpack_compose_the_movie.domain.data.title.Genre
 import net.numa08.jetpack_compose_the_movie.domain.data.title.Poster
 import net.numa08.jetpack_compose_the_movie.domain.repository.TitleRepository
@@ -14,8 +16,9 @@ class HomeViewModel @Inject constructor(
     private val titleRepository: TitleRepository
 ) : ViewModel() {
 
-    val allGenres: Flow<List<Genre>> = titleRepository.allGenres()
+    val genres: StateFlow<List<Genre>> =
+        titleRepository.genresHasTitles.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
-    fun postersInGenre(genre: Genre): Flow<PagingData<Poster>>
-        = titleRepository.allPostersInGenre(genre = genre)
+    fun postersInGenre(genre: Genre): Flow<PagingData<Poster>> =
+        titleRepository.allPostersInGenre(genre = genre)
 }

@@ -4,8 +4,10 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.*
 import net.numa08.jetpack_compose_the_movie.data.database.imdb.IMDBDao
 import net.numa08.jetpack_compose_the_movie.data.database.omdb.OMDBDao
 import net.numa08.jetpack_compose_the_movie.data.http.omdb.OMDbService
@@ -20,7 +22,7 @@ class TitleRepository(
     private val omDbService: OMDbService
 ) {
 
-    fun allGenres(): Flow<List<Genre>> = imdbDao.allGenres().map { genres ->
+    val genresHasTitles: Flow<List<Genre>> = imdbDao.genresHasTitles().map { genres ->
         genres.map {
             Genre(
                 genre = it.genre,
